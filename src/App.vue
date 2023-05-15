@@ -1,25 +1,31 @@
 <!-- API credit https://github.com/lukePeavey/quotable-->
 <template>
   <h1>Quote generator</h1>
+  <!-- Create main container for the content to be displayed -->
   <div id="app">
     <h2 :key="loadKey">
-      {{ " \" "+ Quote +" \" "}}
+      <!-- Display quote, break line and display author -->
+      {{ "\""+Quote+"\""}}
     <br>
-      {{ "- "+ Author }}
+      {{ "- "+Author }}
     </h2>
+    <!-- Create button and listen for event click, when click is sent run forceRerender function -->
     <button class="btn btn__primary btn__lg" @click="forceRerender()">Generate</button>
   </div>
   <footer>Built with Vue</footer>
 </template>
 
 <script>
+//Import Axios for API handling
 import axios from 'axios';
 
 export default {
   name: 'App',
+  //Change page title
   created() {
     document.title = "Random quote";
   },
+  //Define variables
   data() {
     return {
       Quote: null,
@@ -28,13 +34,18 @@ export default {
     }
   },
   methods: {
+    //Functionality for the "Generate button"
     forceRerender(){
+      //When "Generate" button is clicked adds 1 to loadKey which makes the element re render 
+      //and a new quote is displayed
       this.loadKey += 1;
+      //Gets the data to be displayed from the API and assigns the value to the variables Quote and Author
       axios
       .get('https://api.quotable.io/random')
       .then(response => (this.Quote = response.data.content, this.Author = response.data.author))
     }
   },
+  //Loads data when the component has finished the initial rendering
   mounted () {
     axios
       .get('https://api.quotable.io/random')
@@ -45,6 +56,7 @@ export default {
 </script>
 
 <style>
+/* Styling */
   body {
     width: 100%;
     max-width: 68rem;
