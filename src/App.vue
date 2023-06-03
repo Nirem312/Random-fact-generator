@@ -3,7 +3,8 @@
   <h1>Quote generator</h1>
   <!-- Create main container for the content to be displayed -->
   <div id="app">
-    <h2 :key="loadKey">
+    <!-- Render if Quote has a value -->
+    <h2 :key="loadKey" v-if="Quote">
       <!-- Display quote, break line and display author -->
       {{ "\""+Quote+"\""}}
     <br>
