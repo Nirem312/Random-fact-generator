@@ -31,9 +31,6 @@ export default {
   methods: {
     //Functionality for the "Generate button"
     forceRerender(){
-      //When "Generate" button is clicked adds 1 to loadKey which makes the element re render 
-      //and a new quote is displayed
-      this.loadKey += 1;
       //Gets the data to be displayed from the API and assigns the value to the variables Quote and Author
       axios
       .get('https://uselessfacts.jsph.pl/random.json?language=en')
