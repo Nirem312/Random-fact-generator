@@ -1,4 +1,4 @@
-# Random quote generator
+# Random fact generator
 
 All the code can be found on the src/App.vue file, to run the app clone the repo and compile it using the npm run serve command on Powershell or bash, once done the app should be accessible by navigating to localhost:port-specified-on-the-console.
 
