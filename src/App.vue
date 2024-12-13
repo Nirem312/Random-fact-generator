@@ -1,16 +1,11 @@
-<!-- API credit https://github.com/lukePeavey/quotable-->
+<!-- API credit https://uselessfacts.jsph.pl/ -->
 <template>
-  <h1>Quote generator</h1>
-  <!-- Create main container for the content to be displayed -->
+  <h1>Random fact generator</h1>
   <div id="app">
-    <!-- Render if Quote has a value -->
-    <h2 :key="loadKey" v-if="Quote">
-      <!-- Display quote, break line and display author -->
-      {{ "\""+Quote+"\""}}
-    <br>
-      {{ "- "+Author }}
+    <h2>
+      {{ Fact }}
     </h2>
-    <!-- Create button and listen for event click, when click is sent run forceRerender function -->
+    <br>
     <button class="btn btn__primary btn__lg" @click="forceRerender()">Generate</button>
   </div>
   <footer>Built with Vue</footer>
@@ -24,14 +19,13 @@ export default {
   name: 'App',
   //Change page title
   created() {
-    document.title = "Random quote";
+    document.title = "Random facts";
+    this.forceRerender();
   },
   //Define variables
   data() {
     return {
-      Quote: null,
-      Author: null,
-      loadKey: 0,
+      Fact: "Coming up with some facts...",
     }
   },
   methods: {
@@ -42,15 +36,9 @@ export default {
       this.loadKey += 1;
       //Gets the data to be displayed from the API and assigns the value to the variables Quote and Author
       axios
-      .get('https://api.quotable.io/random')
-      .then(response => (this.Quote = response.data.content, this.Author = response.data.author))
+      .get('https://uselessfacts.jsph.pl/random.json?language=en')
+      .then(response => (this.Fact = response.data.text))
     }
-  },
-  //Loads data when the component has finished the initial rendering
-  mounted () {
-    axios
-      .get('https://api.quotable.io/random')
-      .then(response => (this.Quote = response.data.content, this.Author = response.data.author))
   },
 }
 
